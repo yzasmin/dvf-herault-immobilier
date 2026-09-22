@@ -1,0 +1,14 @@
+{
+  "projectNumber": "03",
+  "title": "Prix de l'immobilier dans l'Hérault",
+  "category": "Analyse et BI",
+  "stack1": "DuckDB",
+  "stack2": "SQL",
+  "stack3": "Power BI",
+  "metricLabel": "Ventes nettoyées (DVF 2021-2025)",
+  "metricValue": "105 463",
+  "metric2Label": "Appartements, prix médian au m², 2021 à 2025",
+  "metric2Value": "+10,2 %",
+  "figureCaption": "Appartements : prix médian au m² à Sète, Montpellier et Béziers, 2021-2025",
+  "accent": "#3FD1BE"
+}
