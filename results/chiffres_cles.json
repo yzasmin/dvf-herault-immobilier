@@ -1,0 +1,83 @@
+{
+  "annee_debut": 2021,
+  "annee_fin": 2025,
+  "ventes_annee_debut": 24809,
+  "ventes_annee_fin": 19453,
+  "annee_creux_volume": 2024,
+  "ventes_annee_creux": 17147,
+  "evolution_volume_creux_vs_debut": -0.30883953404006614,
+  "evolution_volume_fin_vs_creux": 0.1344841663264711,
+  "prix_m2_median_tous_types_debut": 3006.6666666666665,
+  "prix_m2_median_tous_types_fin": 3301.0752688172042,
+  "annee_pic_prix": 2023,
+  "prix_m2_median_pic": 3355.769230769231,
+  "evolution_prix_tous_types_debut_fin": 0.09791860381946926,
+  "evolution_prix_appartements": {
+    "evolution": 0.10247747747747749,
+    "ic95_bas": 0.0878048319065009,
+    "ic95_haut": 0.11594315202746493
+  },
+  "evolution_prix_maisons": {
+    "evolution": 0.0750202159227431,
+    "ic95_bas": 0.060198986915856,
+    "ic95_haut": 0.0909252629353269
+  },
+  "villes_annee_fin": [
+    {
+      "nom_commune": "Sète",
+      "type_bien": "Appartement",
+      "nb_ventes": 883,
+      "prix_m2_median": 3497.4576271186443
+    },
+    {
+      "nom_commune": "Montpellier",
+      "type_bien": "Appartement",
+      "nb_ventes": 3976,
+      "prix_m2_median": 3424.8287671232874
+    },
+    {
+      "nom_commune": "Béziers",
+      "type_bien": "Appartement",
+      "nb_ventes": 765,
+      "prix_m2_median": 1833.3333333333333
+    },
+    {
+      "nom_commune": "Sète",
+      "type_bien": "Maison",
+      "nb_ventes": 134,
+      "prix_m2_median": 4328.964646464647
+    },
+    {
+      "nom_commune": "Montpellier",
+      "type_bien": "Maison",
+      "nb_ventes": 455,
+      "prix_m2_median": 3809.1304347826085
+    },
+    {
+      "nom_commune": "Béziers",
+      "type_bien": "Maison",
+      "nb_ventes": 496,
+      "prix_m2_median": 2267.4278846153848
+    }
+  ],
+  "communes_extremes_annee_fin": [
+    {
+      "type_bien": "Appartement",
+      "commune_plus_chere": "La Grande-Motte",
+      "prix_m2_median_max": 5232.0,
+      "commune_moins_chere": "Béziers",
+      "prix_m2_median_min": 1833.3333333333333,
+      "rapport_max_min": 2.853818181818182,
+      "communes_publiees": 25
+    },
+    {
+      "type_bien": "Maison",
+      "commune_plus_chere": "La Grande-Motte",
+      "prix_m2_median_max": 5905.263157894737,
+      "commune_moins_chere": "Puisserguier",
+      "prix_m2_median_min": 1711.111111111111,
+      "rapport_max_min": 3.451127819548872,
+      "communes_publiees": 83
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+type_bien,annee,communes_avec_ventes,communes_publiees,ventes,ventes_dans_communes_publiees
+Appartement,2021,163,28,13239,12513
+Appartement,2022,159,30,13578,12832
+Appartement,2023,151,27,11031,10343
+Appartement,2024,145,25,9588,8941
+Appartement,2025,143,25,10957,10201
+Maison,2021,325,113,11570,9538
+Maison,2022,326,104,10875,8617
+Maison,2023,316,82,8570,6257
+Maison,2024,323,77,7559,5354
+Maison,2025,319,83,8496,6254

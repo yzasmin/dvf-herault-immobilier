@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>DVF Hérault : immobilier 2021-2025</title>
+    <style>
+      :root { --fond: #ffffff; --texte: #1d1f23; --doux: #5b6068; --accent: #1f8a7e; }
+      @media (prefers-color-scheme: dark) { :root { --fond: #0d0f12; --texte: #ece8df; --doux: #9aa0a8; --accent: #3fd1be; } }
+      body { margin: 0; background: var(--fond); color: var(--texte); font: 17px/1.6 system-ui, sans-serif; }
+      main { max-width: 720px; margin: 0 auto; padding: 48px 16px; }
+      h1 { font-size: 1.8rem; line-height: 1.25; margin: 0 0 12px; }
+      p { color: var(--doux); }
+      ul { padding: 0; list-style: none; }
+      li { margin: 14px 0; }
+      a { color: var(--accent); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Marché immobilier de l'Hérault, 2021-2025</h1>
+      <p>
+        Analyse des Demandes de valeurs foncières (DVF géolocalisées, Etalab) : nettoyage chiffré avec DuckDB,
+        prix médian au m², volumes, comparaison des communes, modèle Power BI documenté.
+      </p>
+      <ul>
+        <li><a href="demo/">Démo interactive</a> (Streamlit exécuté dans le navigateur avec stlite)</li>
+        <li><a href="notebook.html">Notebook d'analyse</a> (exécuté, sorties conservées)</li>
+        <li><a href="https://github.com/yzasmin/dvf-herault-immobilier">Code source sur GitHub</a></li>
+      </ul>
+      <p>
+        Données : DGFiP, Demandes de valeurs foncières, via Etalab, Licence Ouverte 2.0. Seuls des agrégats sont
+        publiés ; les conditions d'utilisation interdisent la réidentification des personnes et l'indexation des
+        données par les moteurs de recherche. Réalisation : Yasmina Saoud.
+      </p>
+    </main>
+  </body>
+</html>

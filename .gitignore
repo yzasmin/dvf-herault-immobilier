@@ -1,0 +1,16 @@
+# Environnement
+.venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.env
+
+# Données DVF : téléchargées par script, jamais commitées (conditions d'utilisation DVF).
+# Chemin ancré à la racine : app/data/ (agrégats publiés) doit rester versionné.
+/data/
+!/data/.gitkeep
+
+# Artefacts de déploiement assemblés localement
+_site/

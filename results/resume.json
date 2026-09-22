@@ -1,0 +1,26 @@
+{
+  "regles": {
+    "surface_min_m2": 9,
+    "surface_max_m2": 1000,
+    "iqr_k": 1.5,
+    "seuil_publication_commune": 30,
+    "bootstrap": 2000,
+    "graine": 20260922
+  },
+  "periode": [
+    "2021-01-04",
+    "2025-12-31"
+  ],
+  "lignes_brutes": 412496,
+  "mutations_brutes": 178905,
+  "ventes_retenues": 105463,
+  "part_mutations_retenues": 0.589492,
+  "communes_dans_les_donnees": 342,
+  "communes_avec_vente_retenue": 340,
+  "tailles_tables_modele": {
+    "fait_ventes": 105463,
+    "dim_date": 1826,
+    "dim_commune": 342,
+    "dim_type_bien": 2
+  }
+}

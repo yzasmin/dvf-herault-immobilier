@@ -1,0 +1,10 @@
+etape,regle,unite,avant,retirees,apres,part_retiree
+1,Doublons exacts (ligne identique sur les 40 colonnes),lignes,412496,20254,392242,0.049101
+2,"Mutation cohérente (une date, une nature, une valeur foncière)",mutations,178905,4,178901,2.2e-05
+3,"Nature « Vente » uniquement (hors VEFA, échange, adjudication, expropriation, terrain à bâtir)",mutations,178901,16767,162134,0.093722
+4,Valeur foncière renseignée et strictement positive,mutations,162134,156,161978,0.000962
+5,Aucun local industriel ou commercial dans la mutation (prix non séparable),mutations,161978,8414,153564,0.051945
+6,Au moins un logement (retire terrains nus et dépendances vendues seules),mutations,153564,37962,115602,0.247206
+7,Un seul logement (mutations multi-logements : prix global non ventilable),mutations,115602,5229,110373,0.045233
+8,"Surface bâtie renseignée, entre 9 et 1000 m²",mutations,110373,19,110354,0.000172
+9,"Prix au m² hors [Q1 - 1.5 IQR ; Q3 + 1.5 IQR] du log, par type et par année",mutations,110354,4891,105463,0.044321

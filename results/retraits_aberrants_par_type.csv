@@ -1,0 +1,11 @@
+type_local,annee,candidats,sous_borne_basse,sur_borne_haute
+Appartement,2021,13802,518,45
+Appartement,2022,14196,554,64
+Appartement,2023,11540,452,57
+Appartement,2024,10069,413,68
+Appartement,2025,11547,505,85
+Maison,2021,12115,497,48
+Maison,2022,11302,401,26
+Maison,2023,8961,364,27
+Maison,2024,7918,328,31
+Maison,2025,8904,373,35

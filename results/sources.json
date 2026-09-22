@@ -1,0 +1,55 @@
+{
+  "source": "DVF géolocalisées, Etalab (data.gouv.fr), d'après les Demandes de valeurs foncières de la DGFiP",
+  "licence": "Licence Ouverte / Open Licence 2.0, conditions générales d'utilisation DVF (art. R. 112 A-3 LPF)",
+  "departement": "34",
+  "telecharge_le": "2026-09-22T09:30:31+00:00",
+  "millesimes": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "fichiers": [
+    {
+      "annee": 2021,
+      "url": "https://files.data.gouv.fr/geo-dvf/latest/csv/2021/departements/34.csv.gz",
+      "fichier": "data/raw/dvf_34_2021.csv.gz",
+      "octets": 2596507,
+      "sha256": "6a14a159bdce0591f253a67db110b5edc3dcc52d167fcf4677a6217770f886f3",
+      "date_publication_serveur": "2026-05-18T12:00:47.000Z"
+    },
+    {
+      "annee": 2022,
+      "url": "https://files.data.gouv.fr/geo-dvf/latest/csv/2022/departements/34.csv.gz",
+      "fichier": "data/raw/dvf_34_2022.csv.gz",
+      "octets": 2607168,
+      "sha256": "81098bb402e4b9d4d4b31d86130f4a6c643f12099e706d3fa69eb48ae30c70bd",
+      "date_publication_serveur": "2026-05-18T12:19:13.000Z"
+    },
+    {
+      "annee": 2023,
+      "url": "https://files.data.gouv.fr/geo-dvf/latest/csv/2023/departements/34.csv.gz",
+      "fichier": "data/raw/dvf_34_2023.csv.gz",
+      "octets": 2161652,
+      "sha256": "bda8b4abe8a1e14af7545968fb151876d8448aad48422c331b89f4853627c8ca",
+      "date_publication_serveur": "2026-05-18T12:38:14.000Z"
+    },
+    {
+      "annee": 2024,
+      "url": "https://files.data.gouv.fr/geo-dvf/latest/csv/2024/departements/34.csv.gz",
+      "fichier": "data/raw/dvf_34_2024.csv.gz",
+      "octets": 1899040,
+      "sha256": "f32a2b28eae2518eba19ca5768305b42bac55ea700dedd275cd5ec008261ab92",
+      "date_publication_serveur": "2026-05-18T12:56:24.000Z"
+    },
+    {
+      "annee": 2025,
+      "url": "https://files.data.gouv.fr/geo-dvf/latest/csv/2025/departements/34.csv.gz",
+      "fichier": "data/raw/dvf_34_2025.csv.gz",
+      "octets": 1995957,
+      "sha256": "45745325d534e6d39cb9b22c0b0912e5c660bb52f5bfe1cf1c09519c12493bfd",
+      "date_publication_serveur": "2026-05-18T13:14:12.000Z"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+// Mesures DAX du modèle « DVF Hérault » (tables : fait_ventes, dim_date, dim_commune, dim_type_bien).
+// Power BI Desktop n'est pas installé sur le poste de réalisation : ces mesures sont documentées mais
+// n'ont pas été exécutées. Chaque chiffre publié est recalculé en SQL (DuckDB) avec la même définition :
+// voir scripts/pipeline.py (fonction controler_mesures) et results/mesures_dax_sql.csv.
+// Convention : une mesure par bloc, nom entre crochets, dossier d'affichage en commentaire.
+
+// ---------- Dossier : Volumes ----------
+
+[Nb ventes] =
+COUNTROWS ( fait_ventes )
+// SQL : COUNT(*)
+
+[Volume d'affaires] =
+SUM ( fait_ventes[valeur_fonciere] )
+// SQL : SUM(valeur_fonciere)
+
+[Nb ventes N-1] =
+VAR annee_courante = MAX ( dim_date[annee] )
+RETURN
+    CALCULATE ( [Nb ventes], REMOVEFILTERS ( dim_date ), dim_date[annee] = annee_courante - 1 )
+// SQL : COUNT(*) sur l'année précédente, mêmes filtres commune et type
+
+[Évolution volume %] =
+DIVIDE ( [Nb ventes] - [Nb ventes N-1], [Nb ventes N-1] )
+// SQL : COUNT(*) / LAG(COUNT(*)) - 1
+
+[Part des maisons %] =
+DIVIDE (
+    CALCULATE ( [Nb ventes], dim_type_bien[type_bien] = "Maison" ),
+    CALCULATE ( [Nb ventes], REMOVEFILTERS ( dim_type_bien ) )
+)
+// SQL : AVG(CASE WHEN type_bien = 'Maison' THEN 1 ELSE 0 END)
+
+// ---------- Dossier : Prix ----------
+
+[Prix m² médian] =
+MEDIAN ( fait_ventes[prix_m2] )
+// SQL : MEDIAN(prix_m2). DAX et DuckDB interpolent entre les deux valeurs centrales si l'effectif est pair.
+
+[Prix m² moyen] =
+AVERAGE ( fait_ventes[prix_m2] )
+// SQL : AVG(prix_m2). Affiché à côté de la médiane pour montrer l'effet de la queue droite.
+
+[Prix m² 1er quartile] =
+PERCENTILE.INC ( fait_ventes[prix_m2], 0.25 )
+// SQL : QUANTILE_CONT(prix_m2, 0.25). PERCENTILE.INC et QUANTILE_CONT utilisent la même interpolation.
+
+[Prix m² 3e quartile] =
+PERCENTILE.INC ( fait_ventes[prix_m2], 0.75 )
+// SQL : QUANTILE_CONT(prix_m2, 0.75)
+
+[Valeur médiane] =
+MEDIAN ( fait_ventes[valeur_fonciere] )
+// SQL : MEDIAN(valeur_fonciere)
+
+[Surface médiane] =
+MEDIAN ( fait_ventes[surface_bati] )
+// SQL : MEDIAN(surface_bati)
+
+[Prix m² médian N-1] =
+VAR annee_courante = MAX ( dim_date[annee] )
+RETURN
+    CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_date ), dim_date[annee] = annee_courante - 1 )
+// SQL : MEDIAN(prix_m2) sur l'année précédente, mêmes filtres commune et type
+
+[Évolution prix m² %] =
+DIVIDE ( [Prix m² médian] - [Prix m² médian N-1], [Prix m² médian N-1] )
+// SQL : MEDIAN(prix_m2) / LAG(MEDIAN(prix_m2)) - 1
+
+[Prix m² médian 2021] =
+CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_date ), dim_date[annee] = 2021 )
+
+[Évolution depuis 2021 %] =
+VAR depart = [Prix m² médian 2021]
+RETURN
+    IF ( MAX ( dim_date[annee] ) > 2021, DIVIDE ( [Prix m² médian] - depart, depart ) )
+// SQL : ind_commune_evolution.evolution_prix_m2 et results/ic_evolutions.csv (2021 -> 2025)
+
+// ---------- Dossier : Communes ----------
+
+[Seuil de publication] = 30
+// Une médiane calculée sur moins de 30 ventes est trop instable : elle n'est pas affichée.
+
+[Prix m² médian publiable] =
+IF ( [Nb ventes] >= [Seuil de publication], [Prix m² médian] )
+// SQL : CASE WHEN COUNT(*) >= 30 THEN MEDIAN(prix_m2) END (table ind_commune_annee_type)
+
+[Prix m² médian Hérault] =
+CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_commune ) )
+
+[Écart à l'Hérault %] =
+IF (
+    NOT ISBLANK ( [Prix m² médian publiable] ),
+    DIVIDE ( [Prix m² médian publiable], [Prix m² médian Hérault] ) - 1
+)
+// SQL : MEDIAN(prix_m2 de la commune) / MEDIAN(prix_m2 du département, mêmes année et type) - 1
+
+[Rang prix commune] =
+IF (
+    NOT ISBLANK ( [Prix m² médian publiable] ),
+    RANKX (
+        FILTER ( ALL ( dim_commune ), NOT ISBLANK ( [Prix m² médian publiable] ) ),
+        [Prix m² médian publiable], , DESC, DENSE
+    )
+)
+// SQL : DENSE_RANK() OVER (ORDER BY prix_m2_median DESC) parmi les communes publiables

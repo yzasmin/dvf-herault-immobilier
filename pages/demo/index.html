@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Conditions d'utilisation DVF : pas d'indexation par les moteurs de recherche. -->
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Immobilier dans l'Hérault (DVF), démo</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.1/build/stlite.css" />
+    <style>
+      #chargement { font-family: system-ui, sans-serif; color: #444; padding: 2rem; }
+    </style>
+  </head>
+  <body>
+    <div id="chargement">
+      Chargement de Python dans le navigateur (Pyodide et Streamlit, environ 30 Mo au premier accès)...
+    </div>
+    <div id="root"></div>
+    <script type="module">
+      import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.9.1/build/stlite.js";
+
+      const tables = [
+        "ind_annee_type", "ind_annee", "ind_mois_type",
+        "ind_commune_annee_type", "ind_commune_evolution", "ic_medianes",
+      ];
+      const files = { "streamlit_app.py": { url: "./streamlit_app.py" } };
+      for (const t of tables) files[`data/${t}.csv`] = { url: `./data/${t}.csv` };
+
+      document.getElementById("chargement").remove();
+      mount(
+        {
+          requirements: ["altair"],
+          entrypoint: "streamlit_app.py",
+          files,
+          streamlitConfig: { "client.toolbarMode": "viewer", "theme.base": "light" },
+        },
+        document.getElementById("root"),
+      );
+    </script>
+  </body>
+</html>

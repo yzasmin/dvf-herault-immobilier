@@ -1,0 +1,45 @@
+name: Publier la démo sur GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  construire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assembler le site
+        run: |
+          mkdir -p _site/demo/data
+          cp pages/index.html _site/index.html
+          cp pages/demo/index.html _site/demo/index.html
+          cp app/streamlit_app.py _site/demo/streamlit_app.py
+          cp app/data/*.csv _site/demo/data/
+          cp notebooks/analyse.html _site/notebook.html
+          du -sh _site
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deployer:
+    needs: construire
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    steps:
+      - id: deploiement
+        uses: actions/deploy-pages@v4
