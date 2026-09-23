@@ -1,0 +1,37 @@
+/// Communes de l'Hérault présentes dans les DVF.
+table dim_commune
+	lineageTag: 71b5ee30-fd6e-4ea6-90ec-bfcf1cdd3278
+
+	column code_commune
+		dataType: string
+		lineageTag: 53cb84c6-2650-4e12-aa1b-7e72fc30e2cc
+		summarizeBy: none
+		sourceColumn: code_commune
+
+	column nom_commune
+		dataType: string
+		lineageTag: b3721132-8187-4955-996e-44f32d53962e
+		summarizeBy: none
+		sourceColumn: nom_commune
+
+	column code_postal_principal
+		dataType: string
+		lineageTag: ea9598e9-7df9-4205-ad33-a524de9850f5
+		summarizeBy: none
+		sourceColumn: code_postal_principal
+
+	column ville_suivie
+		dataType: boolean
+		lineageTag: f988c645-f7e1-4653-89b6-76369c398772
+		summarizeBy: none
+		sourceColumn: ville_suivie
+
+	partition dim_commune = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DossierDonnees & "\dim_commune.parquet")),
+				    Types = Table.TransformColumnTypes(Source, {{"code_commune", type text}, {"nom_commune", type text}, {"code_postal_principal", type text}, {"ville_suivie", type logical}})
+				in
+				    Types
+

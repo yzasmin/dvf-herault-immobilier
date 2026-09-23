@@ -1,0 +1,19 @@
+// Une ligne par année et type de bien.
+EVALUATE
+SUMMARIZECOLUMNS (
+    dim_date[annee],
+    dim_type_bien[type_bien],
+    "Nb ventes", [Nb ventes],
+    "Prix m2 median", [Prix m² médian],
+    "Prix m2 moyen", [Prix m² moyen],
+    "Prix m2 1er quartile", [Prix m² 1er quartile],
+    "Prix m2 3e quartile", [Prix m² 3e quartile],
+    "Valeur mediane", [Valeur médiane],
+    "Surface mediane", [Surface médiane],
+    "Volume d affaires", [Volume d'affaires],
+    "Evolution prix", [Évolution prix m² %],
+    "Evolution volume", [Évolution volume %],
+    "Evolution depuis 2021", [Évolution depuis 2021 %],
+    "Part des maisons", [Part des maisons %]
+)
+ORDER BY dim_type_bien[type_bien], dim_date[annee]

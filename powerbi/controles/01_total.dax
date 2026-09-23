@@ -1,0 +1,14 @@
+// Contexte « aucun filtre » : toutes les ventes, toutes les années, tous les types.
+EVALUATE
+ROW (
+    "Nb ventes", [Nb ventes],
+    "Prix m2 median", [Prix m² médian],
+    "Prix m2 moyen", [Prix m² moyen],
+    "Prix m2 1er quartile", [Prix m² 1er quartile],
+    "Prix m2 3e quartile", [Prix m² 3e quartile],
+    "Valeur mediane", [Valeur médiane],
+    "Surface mediane", [Surface médiane],
+    "Volume d affaires", [Volume d'affaires],
+    "Part des maisons", [Part des maisons %],
+    "Seuil de publication", [Seuil de publication]
+)

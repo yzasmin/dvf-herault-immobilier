@@ -1,0 +1,11 @@
+relationship 23005071-b2c3-4910-9428-7d2c83eb93da
+	fromColumn: fait_ventes.date
+	toColumn: dim_date.date
+
+relationship 89171eee-4a26-415d-b63e-e9ad2d75e404
+	fromColumn: fait_ventes.code_commune
+	toColumn: dim_commune.code_commune
+
+relationship 65beafff-edc0-4885-805c-8f9d9dae95d9
+	fromColumn: fait_ventes.code_type_bien
+	toColumn: dim_type_bien.code_type_bien

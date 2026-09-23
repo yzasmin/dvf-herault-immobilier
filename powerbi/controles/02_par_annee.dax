@@ -1,0 +1,21 @@
+// Une ligne par année : mesures de base et mesures de comparaison temporelle.
+EVALUATE
+SUMMARIZECOLUMNS (
+    dim_date[annee],
+    "Nb ventes", [Nb ventes],
+    "Nb ventes N-1", [Nb ventes N-1],
+    "Evolution volume", [Évolution volume %],
+    "Prix m2 median", [Prix m² médian],
+    "Prix m2 moyen", [Prix m² moyen],
+    "Prix m2 1er quartile", [Prix m² 1er quartile],
+    "Prix m2 3e quartile", [Prix m² 3e quartile],
+    "Prix m2 median N-1", [Prix m² médian N-1],
+    "Evolution prix", [Évolution prix m² %],
+    "Prix m2 median 2021", [Prix m² médian 2021],
+    "Evolution depuis 2021", [Évolution depuis 2021 %],
+    "Valeur mediane", [Valeur médiane],
+    "Surface mediane", [Surface médiane],
+    "Volume d affaires", [Volume d'affaires],
+    "Part des maisons", [Part des maisons %]
+)
+ORDER BY dim_date[annee]

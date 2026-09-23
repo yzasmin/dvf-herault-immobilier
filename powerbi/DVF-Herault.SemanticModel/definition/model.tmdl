@@ -1,0 +1,13 @@
+model Model
+	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: fr-FR
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+ref table fait_ventes
+ref table dim_date
+ref table dim_commune
+ref table dim_type_bien
+ref table Mesures

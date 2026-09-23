@@ -1,0 +1,130 @@
+mesure,contexte,valeur_dax,valeur_sql,ecart_absolu,ecart_relatif,identique
+Nb ventes,annee=2025,19453,19453,0,0,True
+Part des maisons %,annee=2025,0.436744975068,0.436744975068,2.22044604925e-16,5.08407921328e-16,True
+Prix m² 1er quartile,annee=2025,2427.84090909,2427.84090909,9.09494701773e-13,3.74610502017e-16,True
+Prix m² 3e quartile,annee=2025,4220.77922078,4220.77922078,-9.09494701773e-13,-2.15480283189e-16,True
+Prix m² moyen,annee=2025,3424.64282546,3424.64282546,5.91171556152e-12,1.72622835805e-15,True
+Prix m² médian,annee=2025,3301.07526882,3301.07526882,-3.63797880709e-12,-1.10205872658e-15,True
+Surface médiane,annee=2025,65,65,0,0,True
+Valeur médiane,annee=2025,183737,183737,0,0,True
+Volume d'affaires,annee=2025,4408077325.67,4408077325.67,-1.90734863281e-06,-4.32694005095e-16,True
+Évolution depuis 2021 %,annee=2025,0.0979186038195,0.0979186038195,1.11022302463e-16,1.13382235992e-15,True
+Évolution prix m² %,annee=2025,0.0106995884774,0.0106995884774,2.01227923213e-16,1.88070712849e-14,True
+Évolution volume %,annee=2025,0.134484166326,0.134484166326,0,0,True
+Nb ventes,"annee=2025, type_bien=Appartement",10957,10957,0,0,True
+Part des maisons %,"annee=2025, type_bien=Appartement",0.436744975068,0.436744975068,2.22044604925e-16,5.08407921328e-16,True
+Prix m² 1er quartile,"annee=2025, type_bien=Appartement",2623.1884058,2623.1884058,-9.09494701773e-13,-3.46713449847e-16,True
+Prix m² 3e quartile,"annee=2025, type_bien=Appartement",4390.32258065,4390.32258065,-9.09494701773e-13,-2.07158969544e-16,True
+Prix m² moyen,"annee=2025, type_bien=Appartement",3601.98664584,3601.98664584,1.36424205266e-11,3.78747115633e-15,True
+Prix m² médian,"annee=2025, type_bien=Appartement",3483.33333333,3483.33333333,-3.18323145621e-12,-9.13846351064e-16,True
+Surface médiane,"annee=2025, type_bien=Appartement",44,44,0,0,True
+Valeur médiane,"annee=2025, type_bien=Appartement",144400,144400,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Appartement",1822880561.18,1822880561.18,0,0,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Appartement",0.102477477477,0.102477477477,5.96744875736e-16,5.82318076542e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Appartement",0.010242057865,0.010242057865,1.00613961607e-16,9.82360800268e-15,True
+Évolution volume %,"annee=2025, type_bien=Appartement",0.142782644973,0.142782644973,2.22044604925e-16,1.5551232082e-15,True
+Nb ventes,"annee=2025, type_bien=Appartement, commune=Béziers",765,765,0,0,True
+Part des maisons %,"annee=2025, type_bien=Appartement, commune=Béziers",0.393338620143,0.393338620143,2.22044604925e-16,5.64512594376e-16,True
+Prix m² 1er quartile,"annee=2025, type_bien=Appartement, commune=Béziers",1445.67307692,1445.67307692,3.18323145621e-12,2.20190270333e-15,True
+Prix m² 3e quartile,"annee=2025, type_bien=Appartement, commune=Béziers",2250,2250,0,0,True
+Prix m² moyen,"annee=2025, type_bien=Appartement, commune=Béziers",1939.7477888,1939.7477888,4.09272615798e-12,2.10992696144e-15,True
+Prix m² médian,"annee=2025, type_bien=Appartement, commune=Béziers",1833.33333333,1833.33333333,-3.18323145621e-12,-1.73630806702e-15,True
+Prix m² médian publiable,"annee=2025, type_bien=Appartement, commune=Béziers",1833.33333333,1833.33333333,-3.18323145621e-12,-1.73630806702e-15,True
+Rang prix commune,"annee=2025, type_bien=Appartement, commune=Béziers",25,25,0,0,True
+Surface médiane,"annee=2025, type_bien=Appartement, commune=Béziers",55,55,0,0,True
+Valeur médiane,"annee=2025, type_bien=Appartement, commune=Béziers",100000,100000,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Appartement, commune=Béziers",84426253.83,84426253.83,0,0,True
+Écart à l'Hérault %,"annee=2025, type_bien=Appartement, commune=Béziers",-0.473684210526,-0.473684210526,-1.66533453694e-16,3.51570624465e-16,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Appartement, commune=Béziers",0.200054547934,0.200054547934,0,0,True
+Évolution prix m² %,"annee=2025, type_bien=Appartement, commune=Béziers",0.0377358490566,0.0377358490566,0,0,True
+Nb ventes,"annee=2025, type_bien=Appartement, commune=Montpellier",3976,3976,0,0,True
+Part des maisons %,"annee=2025, type_bien=Appartement, commune=Montpellier",0.102685624013,0.102685624013,-1.94289029309e-16,-1.89207623927e-15,True
+Prix m² 1er quartile,"annee=2025, type_bien=Appartement, commune=Montpellier",2756.31493506,2756.31493506,5.00222085975e-12,1.81482195525e-15,True
+Prix m² 3e quartile,"annee=2025, type_bien=Appartement, commune=Montpellier",4115.46408137,4115.46408137,-1.81898940355e-12,-4.41988890579e-16,True
+Prix m² moyen,"annee=2025, type_bien=Appartement, commune=Montpellier",3456.52058204,3456.52058204,1.36424205266e-12,3.94686512139e-16,True
+Prix m² médian,"annee=2025, type_bien=Appartement, commune=Montpellier",3424.82876712,3424.82876712,2.72848410532e-12,7.96677524877e-16,True
+Prix m² médian publiable,"annee=2025, type_bien=Appartement, commune=Montpellier",3424.82876712,3424.82876712,2.72848410532e-12,7.96677524877e-16,True
+Rang prix commune,"annee=2025, type_bien=Appartement, commune=Montpellier",17,17,0,0,True
+Surface médiane,"annee=2025, type_bien=Appartement, commune=Montpellier",50,50,0,0,True
+Valeur médiane,"annee=2025, type_bien=Appartement, commune=Montpellier",157501,157501,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Appartement, commune=Montpellier",716063781.65,716063781.65,0,0,True
+Écart à l'Hérault %,"annee=2025, type_bien=Appartement, commune=Montpellier",-0.0167955692469,-0.0167955692469,-1.00613961607e-16,5.99050619408e-15,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Appartement, commune=Montpellier",0.0787570104463,0.0787570104463,-9.71445146547e-17,-1.23347133295e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Appartement, commune=Montpellier",0.027448630137,0.027448630137,0,0,True
+Nb ventes,"annee=2025, type_bien=Appartement, commune=Sète",883,883,0,0,True
+Part des maisons %,"annee=2025, type_bien=Appartement, commune=Sète",0.131760078663,0.131760078663,4.99600361081e-16,3.79174303895e-15,True
+Prix m² 1er quartile,"annee=2025, type_bien=Appartement, commune=Sète",2651.65441176,2651.65441176,4.54747350886e-12,1.71495708064e-15,True
+Prix m² 3e quartile,"annee=2025, type_bien=Appartement, commune=Sète",4587.30619413,4587.30619413,0,0,True
+Prix m² moyen,"annee=2025, type_bien=Appartement, commune=Sète",3716.20241516,3716.20241516,5.00222085975e-12,1.34605715753e-15,True
+Prix m² médian,"annee=2025, type_bien=Appartement, commune=Sète",3497.45762712,3497.45762712,-4.09272615798e-12,-1.17020035532e-15,True
+Prix m² médian publiable,"annee=2025, type_bien=Appartement, commune=Sète",3497.45762712,3497.45762712,-4.09272615798e-12,-1.17020035532e-15,True
+Rang prix commune,"annee=2025, type_bien=Appartement, commune=Sète",15,15,0,0,True
+Surface médiane,"annee=2025, type_bien=Appartement, commune=Sète",48,48,0,0,True
+Valeur médiane,"annee=2025, type_bien=Appartement, commune=Sète",154600,154600,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Appartement, commune=Sète",164705671.21,164705671.21,2.98023223877e-08,1.80942903597e-16,True
+Écart à l'Hérault %,"annee=2025, type_bien=Appartement, commune=Sète",0.00405482118239,0.00405482118239,0,0,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Appartement, commune=Sète",0.207010337896,0.207010337896,3.88578058619e-16,1.87709494399e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Appartement, commune=Sète",0.0249124430977,0.0249124430977,1.97758476261e-16,7.93814061052e-15,True
+Nb ventes,"annee=2025, type_bien=Maison",8496,8496,0,0,True
+Part des maisons %,"annee=2025, type_bien=Maison",0.436744975068,0.436744975068,2.22044604925e-16,5.08407921328e-16,True
+Prix m² 1er quartile,"annee=2025, type_bien=Maison",2194.30272109,2194.30272109,5.00222085975e-12,2.27964027555e-15,True
+Prix m² 3e quartile,"annee=2025, type_bien=Maison",3965.97222222,3965.97222222,-2.72848410532e-12,-6.87973579348e-16,True
+Prix m² moyen,"annee=2025, type_bien=Maison",3195.92857878,3195.92857878,-5.91171556152e-12,-1.84976460387e-15,True
+Prix m² médian,"annee=2025, type_bien=Maison",3056.48494937,3056.48494937,-4.54747350886e-12,-1.48781151689e-15,True
+Surface médiane,"annee=2025, type_bien=Maison",91,91,0,0,True
+Valeur médiane,"annee=2025, type_bien=Maison",273170,273170,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Maison",2585196764.49,2585196764.49,0,0,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Maison",0.0750202159227,0.0750202159227,9.71445146547e-17,1.29491115774e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Maison",0.00866853914174,0.00866853914174,0,0,True
+Évolution volume %,"annee=2025, type_bien=Maison",0.123958195529,0.123958195529,9.71445146547e-17,7.8368771214e-16,True
+Nb ventes,"annee=2025, type_bien=Maison, commune=Béziers",496,496,0,0,True
+Part des maisons %,"annee=2025, type_bien=Maison, commune=Béziers",0.393338620143,0.393338620143,2.22044604925e-16,5.64512594376e-16,True
+Prix m² 1er quartile,"annee=2025, type_bien=Maison, commune=Béziers",1867.46390779,1867.46390779,4.09272615798e-12,2.1915958541e-15,True
+Prix m² 3e quartile,"annee=2025, type_bien=Maison, commune=Béziers",2699.59077381,2699.59077381,-3.63797880709e-12,-1.3476038081e-15,True
+Prix m² moyen,"annee=2025, type_bien=Maison, commune=Béziers",2332.71226392,2332.71226392,-9.09494701773e-13,-3.89887220915e-16,True
+Prix m² médian,"annee=2025, type_bien=Maison, commune=Béziers",2267.42788462,2267.42788462,-4.54747350886e-12,-2.00556478101e-15,True
+Prix m² médian publiable,"annee=2025, type_bien=Maison, commune=Béziers",2267.42788462,2267.42788462,-4.54747350886e-12,-2.00556478101e-15,True
+Rang prix commune,"annee=2025, type_bien=Maison, commune=Béziers",72,72,0,0,True
+Surface médiane,"annee=2025, type_bien=Maison, commune=Béziers",90.5,90.5,0,0,True
+Valeur médiane,"annee=2025, type_bien=Maison, commune=Béziers",196927.5,196927.5,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Maison, commune=Béziers",113812413.66,113812413.66,0,0,True
+Écart à l'Hérault %,"annee=2025, type_bien=Maison, commune=Béziers",-0.258158334762,-0.258158334762,4.4408920985e-16,-1.72022030689e-15,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Maison, commune=Béziers",0.119888162523,0.119888162523,-2.08166817117e-16,-1.73634170994e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Maison, commune=Béziers",0.00210416113336,0.00210416113336,-1.00180280738e-16,-4.76105556506e-14,True
+Nb ventes,"annee=2025, type_bien=Maison, commune=Montpellier",455,455,0,0,True
+Part des maisons %,"annee=2025, type_bien=Maison, commune=Montpellier",0.102685624013,0.102685624013,-1.94289029309e-16,-1.89207623927e-15,True
+Prix m² 1er quartile,"annee=2025, type_bien=Maison, commune=Montpellier",3232.10489015,3232.10489015,-9.09494701773e-13,-2.81393931411e-16,True
+Prix m² 3e quartile,"annee=2025, type_bien=Maison, commune=Montpellier",4757.29166667,4757.29166667,4.54747350886e-12,9.55895460589e-16,True
+Prix m² moyen,"annee=2025, type_bien=Maison, commune=Montpellier",4061.74748415,4061.74748415,-1.81898940355e-12,-4.47834192216e-16,True
+Prix m² médian,"annee=2025, type_bien=Maison, commune=Montpellier",3809.13043478,3809.13043478,9.09494701773e-13,2.38767014505e-16,True
+Prix m² médian publiable,"annee=2025, type_bien=Maison, commune=Montpellier",3809.13043478,3809.13043478,9.09494701773e-13,2.38767014505e-16,True
+Rang prix commune,"annee=2025, type_bien=Maison, commune=Montpellier",23,23,0,0,True
+Surface médiane,"annee=2025, type_bien=Maison, commune=Montpellier",97,97,0,0,True
+Valeur médiane,"annee=2025, type_bien=Maison, commune=Montpellier",359600,359600,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Maison, commune=Montpellier",188221224.18,188221224.18,0,0,True
+Écart à l'Hérault %,"annee=2025, type_bien=Maison, commune=Montpellier",0.246245441375,0.246245441375,-1.11022302463e-16,-4.50860336104e-16,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Maison, commune=Montpellier",0.0386472057805,0.0386472057805,2.01227923213e-16,5.20679099949e-15,True
+Évolution prix m² %,"annee=2025, type_bien=Maison, commune=Montpellier",-0.0549017410383,-0.0549017410383,-9.71445146547e-17,1.76942502765e-15,True
+Nb ventes,"annee=2025, type_bien=Maison, commune=Sète",134,134,0,0,True
+Part des maisons %,"annee=2025, type_bien=Maison, commune=Sète",0.131760078663,0.131760078663,4.99600361081e-16,3.79174303895e-15,True
+Prix m² 1er quartile,"annee=2025, type_bien=Maison, commune=Sète",3445.68181818,3445.68181818,1.81898940355e-12,5.27904054851e-16,True
+Prix m² 3e quartile,"annee=2025, type_bien=Maison, commune=Sète",5836.58839252,5836.58839252,2.72848410532e-12,4.67479274163e-16,True
+Prix m² moyen,"annee=2025, type_bien=Maison, commune=Sète",4801.38780717,4801.38780717,0,0,True
+Prix m² médian,"annee=2025, type_bien=Maison, commune=Sète",4328.96464646,4328.96464646,2.72848410532e-12,6.30285605947e-16,True
+Prix m² médian publiable,"annee=2025, type_bien=Maison, commune=Sète",4328.96464646,4328.96464646,2.72848410532e-12,6.30285605947e-16,True
+Rang prix commune,"annee=2025, type_bien=Maison, commune=Sète",8,8,0,0,True
+Surface médiane,"annee=2025, type_bien=Maison, commune=Sète",95,95,0,0,True
+Valeur médiane,"annee=2025, type_bien=Maison, commune=Sète",379775,379775,0,0,True
+Volume d'affaires,"annee=2025, type_bien=Maison, commune=Sète",75195695,75195695,0,0,True
+Écart à l'Hérault %,"annee=2025, type_bien=Maison, commune=Sète",0.416321270405,0.416321270405,3.33066907388e-16,8.00023758246e-16,True
+Évolution depuis 2021 %,"annee=2025, type_bien=Maison, commune=Sète",0.0759211361454,0.0759211361454,0,0,True
+Évolution prix m² %,"annee=2025, type_bien=Maison, commune=Sète",-0.00780402137545,-0.00780402137545,0,-0,True
+Nb ventes,aucun filtre,105463,105463,0,0,True
+Part des maisons %,aucun filtre,0.446317665911,0.446317665911,-4.4408920985e-16,-9.95007018025e-16,True
+Prix m² 1er quartile,aucun filtre,2338.70967742,2338.70967742,-4.09272615798e-12,-1.74999325376e-15,True
+Prix m² 3e quartile,aucun filtre,4159.89469065,4159.89469065,4.54747350886e-12,1.09317034373e-15,True
+Prix m² moyen,aucun filtre,3357.17531373,3357.17531373,-1.72803993337e-11,-5.14730322931e-15,True
+Prix m² médian,aucun filtre,3223.68421053,3223.68421053,4.09272615798e-12,1.26958035921e-15,True
+Surface médiane,aucun filtre,65,65,0,0,True
+Valeur médiane,aucun filtre,180000,180000,0,0,True
+Volume d'affaires,aucun filtre,23693536754.2,23693536754.2,-3.81469726562e-06,-1.61001597406e-16,True

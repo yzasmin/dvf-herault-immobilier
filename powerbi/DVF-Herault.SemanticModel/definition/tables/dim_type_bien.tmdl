@@ -1,0 +1,25 @@
+/// Maison ou appartement.
+table dim_type_bien
+	lineageTag: a68e1ffc-8fb6-4c6c-a6a5-9279f345fb46
+
+	column code_type_bien
+		dataType: int64
+		lineageTag: de1387d9-c722-46db-b86d-83ca0f0ba33a
+		summarizeBy: none
+		sourceColumn: code_type_bien
+
+	column type_bien
+		dataType: string
+		lineageTag: 00bd4be8-8a3a-4fd8-8827-133a9a70d755
+		summarizeBy: none
+		sourceColumn: type_bien
+
+	partition dim_type_bien = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DossierDonnees & "\dim_type_bien.parquet")),
+				    Types = Table.TransformColumnTypes(Source, {{"code_type_bien", Int64.Type}, {"type_bien", type text}})
+				in
+				    Types
+

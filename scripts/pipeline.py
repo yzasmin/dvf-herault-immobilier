@@ -131,8 +131,13 @@ def exporter_modele(con: duckdb.DuckDBPyConnection) -> dict:
     # Les dimensions ne contiennent aucune vente : elles sont aussi versionnées dans powerbi/tables/.
     dims = RACINE / "powerbi" / "tables"
     dims.mkdir(parents=True, exist_ok=True)
-    for table in ["dim_commune", "dim_type_bien"]:
-        con.execute(f"COPY {table} TO '{relatif(dims / f'{table}.csv')}' (HEADER, DELIMITER ',')")
+    for table, cle in [("dim_commune", "code_commune"), ("dim_type_bien", "code_type_bien")]:
+        # Tri explicite : sans ORDER BY, l'ordre des lignes varie d'une exécution à l'autre
+        # et le fichier versionné change sans raison.
+        con.execute(
+            f"COPY (SELECT * FROM {table} ORDER BY {cle}) "
+            f"TO '{relatif(dims / f'{table}.csv')}' (HEADER, DELIMITER ',')"
+        )
     return tailles
 
 
@@ -361,7 +366,10 @@ def main() -> None:
     ecrire_csv(evolutions, RESULTATS / "ic_evolutions.csv")
     ecrire_csv(ic, APP_DATA / "ic_medianes.csv")
 
-    ecrire_csv(controler_mesures(con), RESULTATS / "mesures_dax_sql.csv")
+    # Précision élargie : ce fichier sert de référence à la comparaison avec les mesures DAX
+    # évaluées dans Power BI (scripts/concordance.py).
+    controler_mesures(con).to_csv(RESULTATS / "mesures_dax_sql.csv", index=False,
+                                  encoding="utf-8", float_format="%.17g")
     cles = chiffres_cles(con, evolutions)
     (RESULTATS / "chiffres_cles.json").write_text(json.dumps(cles, ensure_ascii=False, indent=2), encoding="utf-8")
 

@@ -1,0 +1,70 @@
+/// Table de dates, du 1er janvier de la première année au 31 décembre de la dernière.
+table dim_date
+	lineageTag: c5053637-21f9-4f2b-8ae9-6aae813ecd82
+	dataCategory: Time
+
+	column date
+		dataType: dateTime
+		isKey
+		formatString: Short Date
+		lineageTag: 813aff6d-3561-4257-9673-c30da9bf0d4a
+		summarizeBy: none
+		sourceColumn: date
+
+	column annee
+		dataType: int64
+		formatString: 0
+		lineageTag: 7ab118d2-9105-440a-be45-c9e5c92d5dff
+		summarizeBy: none
+		sourceColumn: annee
+
+	column trimestre
+		dataType: int64
+		formatString: 0
+		lineageTag: bc1daf81-5448-44af-ab50-cc1ccae991ff
+		summarizeBy: none
+		sourceColumn: trimestre
+
+	column mois
+		dataType: int64
+		formatString: 0
+		lineageTag: 98cc02f0-276b-4270-ba03-ff5a80c936a8
+		summarizeBy: none
+		sourceColumn: mois
+
+	column annee_mois
+		dataType: string
+		lineageTag: b964acaa-9dae-4426-a5f5-c942657d05a5
+		summarizeBy: none
+		sourceColumn: annee_mois
+
+	column annee_trimestre
+		dataType: string
+		lineageTag: 07704c38-4222-4597-b8e2-f65c829494c3
+		summarizeBy: none
+		sourceColumn: annee_trimestre
+
+	hierarchy Calendrier
+		lineageTag: ddc86f2d-4ba5-4474-9d99-d3df43d32b5a
+
+		level Annee
+			lineageTag: a3b9d31a-2707-431e-b7a1-e387ec877ae8
+			column: annee
+
+		level Trimestre
+			lineageTag: 06bfa56b-471b-4080-bb64-8fecc7f782c2
+			column: annee_trimestre
+
+		level Mois
+			lineageTag: 992172ab-6abb-4ec3-9bc6-ec2a63d5838d
+			column: annee_mois
+
+	partition dim_date = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DossierDonnees & "\dim_date.parquet")),
+				    Types = Table.TransformColumnTypes(Source, {{"date", type date}, {"annee", Int64.Type}, {"trimestre", Int64.Type}, {"mois", Int64.Type}, {"annee_mois", type text}, {"annee_trimestre", type text}})
+				in
+				    Types
+

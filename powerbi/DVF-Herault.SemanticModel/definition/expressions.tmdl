@@ -1,0 +1,6 @@
+/// Dossier contenant les Parquet produits par scripts/pipeline.py.
+/// Après un clone, adapter ce paramètre au chemin local.
+expression DossierDonnees = "C:\Users\33769\Desktop\Offre d'emploi\Portfolio\projets-data\data-analyst\data\processed\powerbi" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+	lineageTag: 3c24f61d-b280-4b4c-83a1-776fb53ad60b
+
+	annotation PBI_ResultType = Text

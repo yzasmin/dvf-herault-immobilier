@@ -2,7 +2,8 @@
 
 Analyse des Demandes de valeurs foncières (DVF géolocalisées, Etalab) pour le département de l'Hérault (34),
 millésimes 2021 à 2025 : nettoyage chiffré avec DuckDB, indicateurs de prix et de volumes, modèle en étoile et
-mesures DAX documentés pour Power BI, et une démo Streamlit qui tourne directement dans le navigateur.
+projet Power BI versionnable (modèle TMDL et 20 mesures DAX, ouvert et vérifié dans Power BI Desktop), et une démo
+Streamlit qui tourne directement dans le navigateur.
 
 - Démo : <https://yzasmin.github.io/dvf-herault-immobilier/demo/>
 - Notebook exécuté : <https://yzasmin.github.io/dvf-herault-immobilier/notebook.html>
@@ -20,7 +21,7 @@ Ce dépôt répond à trois besoins :
 1. un **nettoyage justifié et chiffré**, où chaque ligne retirée est comptée et expliquée ;
 2. des **indicateurs stables** (médianes, seuil minimal de ventes, intervalles de confiance) plutôt que des moyennes
    tirées par quelques ventes exceptionnelles ;
-3. une **livraison utilisable** : modèle Power BI prêt à importer, démo publique consultable sans rien installer.
+3. une **livraison utilisable** : projet Power BI prêt à ouvrir, démo publique consultable sans rien installer.
 
 ## Résultats
 
@@ -78,6 +79,37 @@ pour les maisons (74 % des ventes de maisons) : `results/couverture_communes.csv
 
 ![Prix médian au m² par commune, appartements 2025](figures/04-communes-appartements.png)
 
+### Power BI : le modèle tourne, et ses mesures donnent les mêmes chiffres que le SQL
+
+Le dossier `powerbi/` contient un **projet Power BI (`.pbip`)** : modèle sémantique en TMDL (texte versionnable),
+20 mesures DAX et une page de rapport. Il a été ouvert dans **Power BI Desktop 2.157.1354.0** le 23/09/2026 : le
+modèle se charge, l'actualisation importe les 105 463 ventes et les mesures s'évaluent.
+
+![Rapport Power BI ouvert dans Power BI Desktop](powerbi/capture-rapport.png)
+
+Chaque mesure a ensuite été interrogée directement dans le moteur (`scripts/executer_dax.ps1`, requêtes de
+`powerbi/controles/`) et comparée à la même définition recalculée en SQL sur DuckDB
+(`scripts/concordance.py`) : **129 comparaisons, 15 mesures, 10 contextes de filtre, aucune différence**
+(écart relatif maximal 4,8e-14, soit l'arrondi des flottants). Extrait de `results/concordance_dax_powerbi.csv` :
+
+| Mesure | Contexte | Power BI (DAX) | DuckDB (SQL) | Écart absolu |
+| --- | --- | --- | --- | --- |
+| Nb ventes | aucun filtre | 105 463 | 105 463 | 0 |
+| Prix m² médian | aucun filtre | 3 223,684211 | 3 223,684211 | 4,1e-12 |
+| Prix m² moyen | aucun filtre | 3 357,175314 | 3 357,175314 | -1,7e-11 |
+| Volume d'affaires | aucun filtre | 23 693 536 754,20 | 23 693 536 754,20 | -3,8e-06 |
+| Prix m² médian | 2025, appartements | 3 483,333333 | 3 483,333333 | -3,2e-12 |
+| Évolution prix m² % | 2025, appartements | 0,010242 | 0,010242 | 1,0e-16 |
+| Évolution depuis 2021 % | 2025, appartements | 0,102477 | 0,102477 | 6,0e-16 |
+| Prix m² médian publiable | 2025, appartements, Béziers | 1 833,333333 | 1 833,333333 | -3,2e-12 |
+| Écart à l'Hérault % | 2025, appartements, Montpellier | -0,016796 | -0,016796 | -1,0e-16 |
+| Rang prix commune | 2025, appartements, Montpellier | 17 | 17 | 0 |
+
+Le `.pbix` n'est pas versionné : il embarquerait les 105 463 ventes ligne à ligne dans un dépôt public indexable,
+ce qu'interdisent les conditions d'utilisation DVF suivies partout ailleurs ici. Ce n'est pas une question de
+taille (le Parquet du fait pèse 2,4 Mo) : le `.pbip` contient la définition complète, sans donnée, et chacun
+reconstruit un `.pbix` en local par **Fichier > Enregistrer sous**.
+
 ## Reproduire depuis un clone vierge
 
 Pré-requis : [uv](https://docs.astral.sh/uv/) et Python 3.11 ou 3.12. Aucune clé ni aucun compte n'est nécessaire.
@@ -96,6 +128,15 @@ uv run jupyter nbconvert --to html --output-dir notebooks notebooks/analyse.ipyn
 uv run streamlit run app/streamlit_app.py      # démo en local, http://localhost:8501
 ```
 
+Partie Power BI (Windows, Power BI Desktop installé) :
+
+```powershell
+uv run python scripts/construire_pbip.py       # (re)génère powerbi/DVF-Herault.pbip depuis powerbi/mesures.dax
+# ouvrir powerbi/DVF-Herault.pbip dans Power BI Desktop, puis Accueil > Actualiser
+.\scripts\executer_dax.ps1                     # interroge le moteur local, écrit results/powerbi/*.csv
+uv run python scripts/concordance.py           # compare les mesures DAX au SQL -> results/concordance_dax_powerbi.csv
+```
+
 Le poste de développement dispose de 8 Go de RAM dont souvent moins de 1 Go libre : DuckDB est limité à 600 Mo
 (`SET memory_limit='600MB'`), lit les `.csv.gz` sans les décompresser sur le disque, et le bootstrap est calculé par
 lots de 100 rééchantillons.
@@ -103,12 +144,15 @@ lots de 100 rééchantillons.
 ## Structure
 
 ```
-scripts/     telecharger.py, pipeline.py, figures.py, construire_notebook.py
+scripts/     telecharger.py, pipeline.py, figures.py, construire_notebook.py,
+             construire_pbip.py, executer_dax.ps1, concordance.py
 sql/         01_brut.sql ... 05_indicateurs.sql (nettoyage, modèle en étoile, indicateurs)
-results/     tous les chiffres publiés (CSV et JSON) : c'est la source de la fiche et de ce README
+results/     tous les chiffres publiés (CSV et JSON) : c'est la source de la fiche et de ce README,
+             dont powerbi/ (mesures évaluées par Power BI) et concordance_dax_powerbi.csv
 app/         streamlit_app.py et app/data/*.csv (agrégats légers, environ 150 Ko)
 pages/       page d'accueil et page de la démo stlite publiées sur GitHub Pages
-powerbi/     mesures.dax, MODELE.md, tables/ (dimensions sans donnée individuelle)
+powerbi/     DVF-Herault.pbip (projet Power BI : modèle TMDL + rapport), mesures.dax, MODELE.md,
+             controles/*.dax, capture-rapport.png, tables/ (dimensions sans donnée individuelle)
 notebooks/   analyse.ipynb exécuté et analyse.html
 figures/     graphiques du README et de la fiche
 teaser/      variables.json et figure sombre 1600x900 pour la vidéo de présentation
@@ -148,9 +192,10 @@ data/        ignoré par git : fichiers bruts téléchargés et tables du modèl
 - **Délai et complétude.** Les DVF sont publiées deux fois par an avec plusieurs mois de décalage, et l'année la
   plus récente peut encore se compléter. Les actes non soumis à publicité foncière (successions, donations) n'y
   figurent jamais.
-- **Power BI Desktop n'est pas installé sur le poste** (vérifié le 22/09/2026) : les mesures DAX de
-  `powerbi/mesures.dax` sont documentées mais n'ont pas été exécutées. Chaque chiffre publié est recalculé en SQL
-  avec la même définition, mesure par mesure, dans `results/mesures_dax_sql.csv`.
+- **Le rapport Power BI reste volontairement simple** : une page, dix visuels. Les pages « Communes » et
+  « Comparaison de villes » décrites dans `powerbi/MODELE.md` ne sont pas construites. Le `.pbix` n'est pas
+  versionné (voir plus haut), et le chemin des données passe par un paramètre de requête à adapter après un clone :
+  Power BI n'accepte pas de chemin relatif pour un fichier local.
 - **Le seuil de 30 ventes écarte la majorité des communes rurales** : l'analyse communale ne vaut que pour les
   communes les plus actives.
 - **La démo stlite télécharge Python dans le navigateur** (environ 30 Mo au premier accès, quelques dizaines de

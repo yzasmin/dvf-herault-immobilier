@@ -1,0 +1,26 @@
+// Montpellier, Sète et Béziers en 2025, par type de bien : mesures de commune.
+EVALUATE
+CALCULATETABLE (
+    SUMMARIZECOLUMNS (
+        dim_commune[nom_commune],
+        dim_type_bien[type_bien],
+        "Nb ventes", [Nb ventes],
+        "Prix m2 median", [Prix m² médian],
+        "Prix m2 median publiable", [Prix m² médian publiable],
+        "Prix m2 median Herault", [Prix m² médian Hérault],
+        "Ecart a l Herault", [Écart à l'Hérault %],
+        "Rang prix commune", [Rang prix commune],
+        "Evolution prix", [Évolution prix m² %],
+        "Evolution depuis 2021", [Évolution depuis 2021 %],
+        "Prix m2 moyen", [Prix m² moyen],
+        "Valeur mediane", [Valeur médiane],
+        "Surface mediane", [Surface médiane],
+        "Volume d affaires", [Volume d'affaires],
+        "Prix m2 1er quartile", [Prix m² 1er quartile],
+        "Prix m2 3e quartile", [Prix m² 3e quartile],
+        "Part des maisons", [Part des maisons %]
+    ),
+    dim_date[annee] = 2025,
+    TREATAS ( { "Montpellier", "Sète", "Béziers" }, dim_commune[nom_commune] )
+)
+ORDER BY dim_type_bien[type_bien], dim_commune[nom_commune]

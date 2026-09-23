@@ -1,0 +1,84 @@
+/// Une ligne par vente retenue (mutation portant sur un seul logement).
+table fait_ventes
+	lineageTag: 16fec112-73f1-4554-b284-507e5fe7e6e0
+
+	column id_vente
+		dataType: int64
+		lineageTag: a4059b58-cd1b-4303-99e8-a7769e6da9e3
+		summarizeBy: none
+		sourceColumn: id_vente
+
+	column id_mutation
+		dataType: string
+		lineageTag: 457dd36c-36e9-4bdb-8fbe-9b2ed368a72f
+		summarizeBy: none
+		sourceColumn: id_mutation
+
+	column date
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: d928edde-f760-4da0-8b22-6db54ea53e81
+		summarizeBy: none
+		sourceColumn: date
+
+	column code_commune
+		dataType: string
+		lineageTag: f77cc4ad-58a1-42b6-bb78-f7d40652bd7d
+		summarizeBy: none
+		sourceColumn: code_commune
+
+	column code_type_bien
+		dataType: int64
+		lineageTag: 8649529f-1002-4260-a2f8-ef205b7cd79d
+		summarizeBy: none
+		sourceColumn: code_type_bien
+
+	column valeur_fonciere
+		dataType: double
+		formatString: #,0 €
+		lineageTag: 7e2096af-c36a-484b-8852-c73ecdb41fa2
+		summarizeBy: sum
+		sourceColumn: valeur_fonciere
+
+	column surface_bati
+		dataType: double
+		formatString: #,0
+		lineageTag: 79b4e2dc-d767-4146-954d-17ad4e6901a0
+		summarizeBy: sum
+		sourceColumn: surface_bati
+
+	column nb_pieces
+		dataType: int64
+		lineageTag: 6d9e9312-c526-4e49-8fb2-1f46812bc358
+		summarizeBy: sum
+		sourceColumn: nb_pieces
+
+	column surface_terrain
+		dataType: double
+		formatString: #,0
+		lineageTag: ee8ebb5b-2b5b-4004-870e-ad5b2e646cf3
+		summarizeBy: sum
+		sourceColumn: surface_terrain
+
+	column nb_dependances
+		dataType: int64
+		lineageTag: 7f699917-0645-4c75-a052-d9ba6f82b0c3
+		summarizeBy: sum
+		sourceColumn: nb_dependances
+
+	column prix_m2
+		dataType: double
+		formatString: #,0 €
+		lineageTag: ac8226d3-f120-46a8-b22c-9f7177a98572
+		summarizeBy: none
+		sourceColumn: prix_m2
+
+	partition fait_ventes = m
+		mode: import
+		source =
+				let
+				    Source = Parquet.Document(File.Contents(DossierDonnees & "\fait_ventes.parquet")),
+				    Types = Table.TransformColumnTypes(Source, {{"id_vente", Int64.Type}, {"id_mutation", type text}, {"date", type date}, {"code_commune", type text}, {"code_type_bien", Int64.Type}, {"valeur_fonciere", type number}, {"surface_bati", type number}, {"nb_pieces", Int64.Type}, {"surface_terrain", type number}, {"nb_dependances", Int64.Type}, {"prix_m2", type number}})
+				in
+				    Types
+

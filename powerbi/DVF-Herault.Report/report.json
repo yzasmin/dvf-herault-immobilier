@@ -1,0 +1,114 @@
+{
+  "config": "{\"version\": \"5.55\", \"themeCollection\": {\"baseTheme\": {\"name\": \"CY24SU10\", \"version\": \"5.55\", \"type\": 2}}, \"activeSectionIndex\": 0, \"defaultDrillFilterOtherVisuals\": true, \"settings\": {\"useStylableVisualContainerHeader\": true}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY24SU10",
+            "path": "BaseThemes/CY24SU10.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{}",
+      "displayName": "Vue d'ensemble",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.0,
+      "name": "pageVueDensemble",
+      "ordinal": 0,
+      "visualContainers": [
+        {
+          "x": 20,
+          "y": 16,
+          "z": 0,
+          "width": 290,
+          "height": 120,
+          "config": "{\"name\": \"carteVentes\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 16, \"z\": 0, \"width\": 290, \"height\": 120}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"Mesures.Nb ventes\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Nb ventes\"}, \"Name\": \"Mesures.Nb ventes\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Nb ventes'\"}}}}}]}}}"
+        },
+        {
+          "x": 325,
+          "y": 16,
+          "z": 0,
+          "width": 290,
+          "height": 120,
+          "config": "{\"name\": \"cartePrix\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 325, \"y\": 16, \"z\": 0, \"width\": 290, \"height\": 120}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"Mesures.Prix m² médian\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Prix m² médian\"}, \"Name\": \"Mesures.Prix m² médian\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Prix m² médian'\"}}}}}]}}}"
+        },
+        {
+          "x": 630,
+          "y": 16,
+          "z": 0,
+          "width": 290,
+          "height": 120,
+          "config": "{\"name\": \"carteMaisons\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 630, \"y\": 16, \"z\": 0, \"width\": 290, \"height\": 120}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"Mesures.Part des maisons %\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Part des maisons %\"}, \"Name\": \"Mesures.Part des maisons %\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Part des maisons %'\"}}}}}]}}}"
+        },
+        {
+          "x": 935,
+          "y": 16,
+          "z": 0,
+          "width": 290,
+          "height": 120,
+          "config": "{\"name\": \"carteVolume\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 935, \"y\": 16, \"z\": 0, \"width\": 290, \"height\": 120}}], \"singleVisual\": {\"visualType\": \"card\", \"projections\": {\"Values\": [{\"queryRef\": \"Mesures.Volume d'affaires\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Volume d'affaires\"}, \"Name\": \"Mesures.Volume d'affaires\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Volume d'affaires'\"}}}}}]}}}"
+        },
+        {
+          "x": 20,
+          "y": 148,
+          "z": 0,
+          "width": 600,
+          "height": 250,
+          "config": "{\"name\": \"courbePrix\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 148, \"z\": 0, \"width\": 600, \"height\": 250}}], \"singleVisual\": {\"visualType\": \"lineChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.annee\"}], \"Y\": [{\"queryRef\": \"Mesures.Prix m² médian\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}, \"Name\": \"dim_date.annee\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Prix m² médian\"}, \"Name\": \"Mesures.Prix m² médian\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Prix médian au m² par année'\"}}}}}]}}}"
+        },
+        {
+          "x": 630,
+          "y": 148,
+          "z": 0,
+          "width": 595,
+          "height": 250,
+          "config": "{\"name\": \"barresVentes\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 630, \"y\": 148, \"z\": 0, \"width\": 595, \"height\": 250}}], \"singleVisual\": {\"visualType\": \"columnChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_date.annee\"}], \"Y\": [{\"queryRef\": \"Mesures.Nb ventes\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}, \"Name\": \"dim_date.annee\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Nb ventes\"}, \"Name\": \"Mesures.Nb ventes\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Nombre de ventes par année'\"}}}}}]}}}"
+        },
+        {
+          "x": 20,
+          "y": 408,
+          "z": 0,
+          "width": 600,
+          "height": 290,
+          "config": "{\"name\": \"tableauAnnees\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 20, \"y\": 408, \"z\": 0, \"width\": 600, \"height\": 290}}], \"singleVisual\": {\"visualType\": \"tableEx\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_date.annee\"}, {\"queryRef\": \"Mesures.Nb ventes\"}, {\"queryRef\": \"Mesures.Prix m² médian\"}, {\"queryRef\": \"Mesures.Évolution prix m² %\"}, {\"queryRef\": \"Mesures.Évolution volume %\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_date\", \"Type\": 0}, {\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}, \"Name\": \"dim_date.annee\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Nb ventes\"}, \"Name\": \"Mesures.Nb ventes\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Prix m² médian\"}, \"Name\": \"Mesures.Prix m² médian\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Évolution prix m² %\"}, \"Name\": \"Mesures.Évolution prix m² %\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Évolution volume %\"}, \"Name\": \"Mesures.Évolution volume %\"}], \"OrderBy\": [{\"Direction\": 1, \"Expression\": {\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Par année : volumes, prix et évolutions'\"}}}}}]}}}"
+        },
+        {
+          "x": 630,
+          "y": 408,
+          "z": 0,
+          "width": 400,
+          "height": 290,
+          "config": "{\"name\": \"barresCommunes\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 630, \"y\": 408, \"z\": 0, \"width\": 400, \"height\": 290}}], \"singleVisual\": {\"visualType\": \"barChart\", \"projections\": {\"Category\": [{\"queryRef\": \"dim_commune.nom_commune\"}], \"Y\": [{\"queryRef\": \"Mesures.Prix m² médian publiable\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_commune\", \"Type\": 0}, {\"Name\": \"m\", \"Entity\": \"Mesures\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"nom_commune\"}, \"Name\": \"dim_commune.nom_commune\"}, {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Prix m² médian publiable\"}, \"Name\": \"Mesures.Prix m² médian publiable\"}], \"OrderBy\": [{\"Direction\": 2, \"Expression\": {\"Measure\": {\"Expression\": {\"SourceRef\": {\"Source\": \"m\"}}, \"Property\": \"Prix m² médian publiable\"}}}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Communes les plus chères (au moins 30 ventes)'\"}}}}}]}}}"
+        },
+        {
+          "x": 1040,
+          "y": 408,
+          "z": 0,
+          "width": 185,
+          "height": 140,
+          "config": "{\"name\": \"segmentType\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1040, \"y\": 408, \"z\": 0, \"width\": 185, \"height\": 140}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_type_bien.type_bien\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_type_bien\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"type_bien\"}, \"Name\": \"dim_type_bien.type_bien\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Type de bien'\"}}}}}]}}}"
+        },
+        {
+          "x": 1040,
+          "y": 558,
+          "z": 0,
+          "width": 185,
+          "height": 140,
+          "config": "{\"name\": \"segmentAnnee\", \"layouts\": [{\"id\": 0, \"position\": {\"x\": 1040, \"y\": 558, \"z\": 0, \"width\": 185, \"height\": 140}}], \"singleVisual\": {\"visualType\": \"slicer\", \"projections\": {\"Values\": [{\"queryRef\": \"dim_date.annee\"}]}, \"prototypeQuery\": {\"Version\": 2, \"From\": [{\"Name\": \"d\", \"Entity\": \"dim_date\", \"Type\": 0}], \"Select\": [{\"Column\": {\"Expression\": {\"SourceRef\": {\"Source\": \"d\"}}, \"Property\": \"annee\"}, \"Name\": \"dim_date.annee\"}]}, \"drillFilterOtherVisuals\": true, \"vcObjects\": {\"title\": [{\"properties\": {\"show\": {\"expr\": {\"Literal\": {\"Value\": \"true\"}}}, \"text\": {\"expr\": {\"Literal\": {\"Value\": \"'Année'\"}}}}}]}}}"
+        }
+      ],
+      "width": 1280.0
+    }
+  ]
+}

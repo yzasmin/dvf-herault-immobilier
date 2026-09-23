@@ -1,0 +1,154 @@
+/// Table technique qui porte les mesures (aucune donnée).
+table Mesures
+	lineageTag: 0a1b26fa-d900-4823-beb1-2fb494a42feb
+
+	measure 'Nb ventes' =
+			COUNTROWS ( fait_ventes )
+		lineageTag: 46e63d68-1ca9-4978-ae8c-a57906e3ceaa
+		formatString: #,0
+		displayFolder: Volumes
+
+	measure 'Volume d''affaires' =
+			SUM ( fait_ventes[valeur_fonciere] )
+		lineageTag: 4ab90cb9-b479-4623-87bd-f5e1e1447598
+		formatString: #,0 €
+		displayFolder: Volumes
+
+	measure 'Nb ventes N-1' =
+			VAR annee_courante = MAX ( dim_date[annee] )
+			RETURN
+			CALCULATE ( [Nb ventes], REMOVEFILTERS ( dim_date ), dim_date[annee] = annee_courante - 1 )
+		lineageTag: 63dd8819-0e78-492e-9910-3d8c97de15f3
+		formatString: #,0
+		displayFolder: Volumes
+
+	measure 'Évolution volume %' =
+			DIVIDE ( [Nb ventes] - [Nb ventes N-1], [Nb ventes N-1] )
+		lineageTag: cbe87d72-97ad-4780-b4dc-67342d7b933d
+		formatString: 0.0 %
+		displayFolder: Volumes
+
+	measure 'Part des maisons %' =
+			DIVIDE (
+			CALCULATE ( [Nb ventes], dim_type_bien[type_bien] = "Maison" ),
+			CALCULATE ( [Nb ventes], REMOVEFILTERS ( dim_type_bien ) )
+			)
+		lineageTag: c7480c95-233f-4fcb-8bf0-277774af2ad0
+		formatString: 0.0 %
+		displayFolder: Volumes
+
+	measure 'Prix m² médian' =
+			MEDIAN ( fait_ventes[prix_m2] )
+		lineageTag: 144e9d04-7f82-42ae-ad4f-d625c8bbf7eb
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Prix m² moyen' =
+			AVERAGE ( fait_ventes[prix_m2] )
+		lineageTag: 4c741b97-4861-454e-93cd-37168e8968ce
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Prix m² 1er quartile' =
+			PERCENTILE.INC ( fait_ventes[prix_m2], 0.25 )
+		lineageTag: d590cf59-e7d9-4ccd-931a-b77388896d24
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Prix m² 3e quartile' =
+			PERCENTILE.INC ( fait_ventes[prix_m2], 0.75 )
+		lineageTag: 54469c70-8a11-4e7d-88cb-a57b81b79b4e
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Valeur médiane' =
+			MEDIAN ( fait_ventes[valeur_fonciere] )
+		lineageTag: b31e8aa6-2950-4acb-ba1b-87b39efb0f60
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Surface médiane' =
+			MEDIAN ( fait_ventes[surface_bati] )
+		lineageTag: b085ee7d-54da-478c-8d33-3e3d7499dc0c
+		formatString: #,0
+		displayFolder: Prix
+
+	measure 'Prix m² médian N-1' =
+			VAR annee_courante = MAX ( dim_date[annee] )
+			RETURN
+			CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_date ), dim_date[annee] = annee_courante - 1 )
+		lineageTag: c881a90f-a351-4632-b816-d76d185f6671
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Évolution prix m² %' =
+			DIVIDE ( [Prix m² médian] - [Prix m² médian N-1], [Prix m² médian N-1] )
+		lineageTag: 748a6d2d-aea4-4ad1-bdb3-309abf4c4f25
+		formatString: 0.0 %
+		displayFolder: Prix
+
+	measure 'Prix m² médian 2021' =
+			CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_date ), dim_date[annee] = 2021 )
+		lineageTag: c29cacc5-85dd-4432-bb27-e48f5153245c
+		formatString: #,0 €
+		displayFolder: Prix
+
+	measure 'Évolution depuis 2021 %' =
+			VAR depart = [Prix m² médian 2021]
+			RETURN
+			IF ( MAX ( dim_date[annee] ) > 2021, DIVIDE ( [Prix m² médian] - depart, depart ) )
+		lineageTag: 15242fb7-3d07-44e4-9023-f2da5a96c669
+		formatString: 0.0 %
+		displayFolder: Prix
+
+	measure 'Seuil de publication' =
+			30
+		lineageTag: 1e493080-7eb2-4754-bd01-52482ac220c4
+		formatString: 0
+		displayFolder: Communes
+
+	measure 'Prix m² médian publiable' =
+			IF ( [Nb ventes] >= [Seuil de publication], [Prix m² médian] )
+		lineageTag: 63d82d2e-defa-47e3-b6a6-481a71b6f2f6
+		formatString: #,0 €
+		displayFolder: Communes
+
+	measure 'Prix m² médian Hérault' =
+			CALCULATE ( [Prix m² médian], REMOVEFILTERS ( dim_commune ) )
+		lineageTag: 302ac567-7c51-488d-871c-ba1d21101cb1
+		formatString: #,0 €
+		displayFolder: Communes
+
+	measure 'Écart à l''Hérault %' =
+			IF (
+			NOT ISBLANK ( [Prix m² médian publiable] ),
+			DIVIDE ( [Prix m² médian publiable], [Prix m² médian Hérault] ) - 1
+			)
+		lineageTag: d802d693-c33e-4283-8c8b-28847f85cd9e
+		formatString: 0.0 %
+		displayFolder: Communes
+
+	measure 'Rang prix commune' =
+			IF (
+			NOT ISBLANK ( [Prix m² médian publiable] ),
+			RANKX (
+			FILTER ( ALL ( dim_commune ), NOT ISBLANK ( [Prix m² médian publiable] ) ),
+			[Prix m² médian publiable], , DESC, DENSE
+			)
+			)
+		lineageTag: 698169d8-7256-4046-9313-5404d932406c
+		formatString: 0
+		displayFolder: Communes
+
+	column Value
+		isHidden
+		formatString: 0
+		lineageTag: 8582ef54-f2c1-48b9-ad90-a74d00632c75
+		summarizeBy: none
+		sourceColumn: [Value]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Mesures = calculated
+		mode: import
+		source = ROW("Value", 0)
