@@ -1,5 +1,9 @@
 # Marché immobilier de l'Hérault : des DVF brutes aux indicateurs publiables
 
+[![Déploiement de la démo](https://github.com/yzasmin/dvf-herault-immobilier/actions/workflows/pages.yml/badge.svg)](https://github.com/yzasmin/dvf-herault-immobilier/actions/workflows/pages.yml)
+
+**Fiche détaillée du projet : <https://yzasmin.github.io/projets/data-analyst/>** (portfolio de Yasmina Saoud)
+
 Analyse des Demandes de valeurs foncières (DVF géolocalisées, Etalab) pour le département de l'Hérault (34),
 millésimes 2021 à 2025 : nettoyage chiffré avec DuckDB, indicateurs de prix et de volumes, modèle en étoile et
 projet Power BI versionnable (modèle TMDL et 20 mesures DAX, ouvert et vérifié dans Power BI Desktop), et une démo
