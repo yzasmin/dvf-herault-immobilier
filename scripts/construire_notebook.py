@@ -135,13 +135,22 @@ plt.tight_layout()"""),
     ("md", """Une corrélation négative signifierait que les communes les moins chères en 2021 ont le plus augmenté.
 L'interprétation reste prudente : l'effet de régression vers la moyenne (une médiane 2021 basse par hasard remonte
 mécaniquement) produit le même signe, et la composition des ventes change d'une année à l'autre."""),
-    ("md", """## 6. Mesures DAX recalculées en SQL
+    ("md", """## 6. Mesures DAX de Power BI, contrôlées contre le SQL
 
-Power BI Desktop n'est pas installé sur le poste de réalisation : les mesures de `powerbi/mesures.dax` n'ont pas été
-exécutées. Chacune est recalculée en SQL (DuckDB) avec la même définition dans plusieurs contextes de filtre."""),
+Le projet `powerbi/DVF-Herault.pbip` (modèle sémantique en TMDL, 20 mesures DAX générées depuis
+`powerbi/mesures.dax`) a été ouvert et actualisé dans **Power BI Desktop 2.157.1354.0** : les 105 463 ventes sont
+importées et les mesures s'évaluent. Chaque mesure a ensuite été interrogée dans le moteur local
+(`scripts/executer_dax.ps1`, requêtes de `powerbi/controles/`) puis comparée au même calcul en SQL sur DuckDB
+(`scripts/concordance.py`). Les deux tables ci-dessous montrent d'abord le calcul SQL, puis la comparaison."""),
     ("code", """mesures = pd.read_csv(R / "mesures_dax_sql.csv")
 mesures[mesures.contexte.isin(["annee=2025, type_bien=Appartement",
                                "annee=2025, type_bien=Appartement, commune=Montpellier"])]"""),
+    ("code", """concordance = pd.read_csv(R / "concordance_dax_powerbi.csv")
+print(f"{int(concordance.identique.sum())} / {len(concordance)} valeurs identiques ;",
+      f"{concordance.mesure.nunique()} mesures, {concordance.contexte.nunique()} contextes ;",
+      f"écart relatif maximal {concordance.ecart_relatif.abs().max():.1e}")
+concordance[concordance.contexte == "annee=2025, type_bien=Appartement"][
+    ["mesure", "valeur_dax", "valeur_sql", "ecart_absolu"]]"""),
     ("md", """## 7. Limites
 
 - Prix nominaux, non corrigés de l'inflation.

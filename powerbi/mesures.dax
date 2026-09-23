@@ -1,7 +1,11 @@
 // Mesures DAX du modèle « DVF Hérault » (tables : fait_ventes, dim_date, dim_commune, dim_type_bien).
-// Power BI Desktop n'est pas installé sur le poste de réalisation : ces mesures sont documentées mais
-// n'ont pas été exécutées. Chaque chiffre publié est recalculé en SQL (DuckDB) avec la même définition :
-// voir scripts/pipeline.py (fonction controler_mesures) et results/mesures_dax_sql.csv.
+// Ces mesures alimentent le projet powerbi/DVF-Herault.pbip (modèle TMDL généré par
+// scripts/construire_pbip.py à partir de ce fichier : une seule définition des mesures dans le dépôt).
+// Le projet a été ouvert et actualisé dans Power BI Desktop 2.157.1354.0 le 23/09/2026, et chaque mesure a été
+// interrogée dans le moteur (scripts/executer_dax.ps1) puis comparée au même calcul en SQL sur DuckDB
+// (scripts/pipeline.py, fonction controler_mesures) : 129 comparaisons, 15 mesures, 10 contextes de filtre,
+// aucune différence au-delà de l'arrondi des flottants. Voir results/concordance_dax_powerbi.csv
+// et results/mesures_dax_sql.csv.
 // Convention : une mesure par bloc, nom entre crochets, dossier d'affichage en commentaire.
 
 // ---------- Dossier : Volumes ----------

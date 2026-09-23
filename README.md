@@ -124,7 +124,7 @@ uv run python scripts/figures.py               # figures/*.png et teaser/figure-
 uv run pytest -q                               # 6 tests : règles de regroupement et cohérence des sorties
 uv run python scripts/construire_notebook.py
 uv run jupyter nbconvert --to notebook --execute --inplace notebooks/analyse.ipynb
-uv run jupyter nbconvert --to html --output-dir notebooks notebooks/analyse.ipynb
+uv run python scripts/exporter_html.py         # notebooks/analyse.html, avec la balise noindex
 uv run streamlit run app/streamlit_app.py      # démo en local, http://localhost:8501
 ```
 
