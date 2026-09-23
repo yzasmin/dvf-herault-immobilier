@@ -104,25 +104,33 @@ pd.DataFrame(cles["communes_extremes_annee_fin"])"""),
     ("md", """### Les communes les moins chères rattrapent-elles les autres ?
 
 Pour les couples (commune, type) publiables en 2021 et en 2025, on mesure la corrélation de rang de Spearman entre le
-prix médian 2021 et l'évolution 2021-2025. La p-valeur vient d'un test de permutation (10 000 permutations), pour ne
-pas dépendre d'une hypothèse de loi."""),
+prix médian 2021 et l'évolution 2021-2025. Prise telle quelle, cette corrélation ne prouve rien : le prix de 2021 est
+au numérateur de la première variable et au **dénominateur** de la seconde (`prix_2025 / prix_2021 - 1`). Le seul
+bruit d'échantillonnage sur la médiane 2021 produit donc une corrélation négative, même en l'absence totale de
+rattrapage. Un test de permutation ne répond pas à cette objection : en mélangeant les évolutions, il détruit
+précisément le couplage qu'il faudrait tester, et ne mesure que l'indépendance des deux variables.
+
+Le test ci-dessous sépare aléatoirement les ventes de 2021 de chaque commune en **deux moitiés disjointes** :
+l'abscisse est estimée sur la première moitié, le dénominateur de l'évolution sur la seconde. Les deux bruits
+deviennent indépendants et le couplage mathématique disparaît. On répète 200 fois et on lit la médiane des
+corrélations et son intervalle à 95 %. Le calcul publié est celui de `scripts/pipeline.py`, enregistré dans
+`results/rattrapage_split_sample.csv` ; il est reproduit ici sur les mêmes données."""),
     ("code", """evo = pd.read_csv(R / "ind_commune_evolution.csv").dropna(subset=["evolution_prix_m2"])
-rng = np.random.default_rng(20260922)
 
 def spearman(x, y):
     return np.corrcoef(pd.Series(x).rank(), pd.Series(y).rank())[0, 1]
 
-resultats = []
+# Corrélations brutes, celles qui souffrent du couplage : à titre de comparaison seulement.
 for type_bien, groupe in evo.groupby("type_bien"):
-    x, y = groupe.prix_m2_median_debut.to_numpy(), groupe.evolution_prix_m2.to_numpy()
-    rho = spearman(x, y)
-    permutations = np.array([spearman(x, rng.permutation(y)) for _ in range(10_000)])
-    p = (np.sum(np.abs(permutations) >= abs(rho)) + 1) / (len(permutations) + 1)
-    resultats.append({"type_bien": type_bien, "communes": len(groupe), "rho_spearman": rho, "p_valeur_permutation": p})
-rattrapage = pd.DataFrame(resultats)
-(R / "rattrapage_communes.json").write_text(rattrapage.to_json(orient="records", force_ascii=False, indent=2),
-                                             encoding="utf-8")
-rattrapage"""),
+    rho = spearman(groupe.prix_m2_median_debut, groupe.evolution_prix_m2)
+    rho_fin = spearman(groupe.prix_m2_median_fin, groupe.evolution_prix_m2)
+    print(f"{type_bien:12s} rho(prix 2021, evo) = {rho:+.3f}   rho(prix 2025, evo) = {rho_fin:+.3f}")"""),
+    ("md", """Sous pur artefact de couplage, la corrélation avec le prix de **2025** devrait changer de signe, puisque
+ce prix est au numérateur de l'évolution. Elle reste négative pour les appartements, premier indice que l'effet est
+réel. Le test sur échantillons disjoints le confirme."""),
+    ("code", """rattrapage = pd.read_csv(R / "rattrapage_split_sample.csv")
+rattrapage[["type_bien", "communes", "tirages", "rho_couple_prix_debut", "rho_split_sample_median",
+            "ic95_bas", "ic95_haut", "part_tirages_negatifs"]]"""),
     ("code", """fig, axes = plt.subplots(1, 2, figsize=(12, 4.5))
 for ax, (type_bien, groupe) in zip(axes, evo.groupby("type_bien")):
     ax.scatter(groupe.prix_m2_median_debut, groupe.evolution_prix_m2 * 100, s=np.sqrt(groupe.nb_ventes_periode) * 3,
@@ -132,9 +140,11 @@ for ax, (type_bien, groupe) in zip(axes, evo.groupby("type_bien")):
     ax.set_xlabel("Prix médian au m² en 2021 (€)")
     ax.set_ylabel("Évolution 2021-2025 (%)")
 plt.tight_layout()"""),
-    ("md", """Une corrélation négative signifierait que les communes les moins chères en 2021 ont le plus augmenté.
-L'interprétation reste prudente : l'effet de régression vers la moyenne (une médiane 2021 basse par hasard remonte
-mécaniquement) produit le même signe, et la composition des ventes change d'une année à l'autre."""),
+    ("md", """La corrélation de rang reste négative une fois le couplage écarté, et sur les 200 tirages sans
+exception : les communes les moins chères en 2021 sont bien celles qui ont le plus augmenté. L'intervalle exclut zéro
+pour les deux types de biens. Deux réserves subsistent, de nature différente : la composition des ventes change d'une
+année à l'autre (une commune peut vendre plus de petites surfaces en 2025 qu'en 2021), et le test porte sur les seules
+communes publiables aux deux bornes, soit 22 communes pour les appartements et 82 pour les maisons."""),
     ("md", """## 6. Mesures DAX de Power BI, contrôlées contre le SQL
 
 Le projet `powerbi/DVF-Herault.pbip` (modèle sémantique en TMDL, 20 mesures DAX générées depuis

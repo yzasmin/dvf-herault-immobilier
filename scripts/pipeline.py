@@ -34,6 +34,7 @@ IQR_K = 1.5  # coefficient de Tukey appliqué au log du prix au m²
 SEUIL_PUBLICATION = 30  # ventes minimales pour publier une médiane de commune
 VILLES = {"34172": "Montpellier", "34032": "Béziers", "34301": "Sète"}
 N_BOOTSTRAP = 2000
+N_TIRAGES = 200  # tirages du test split-sample sur le rattrapage des communes
 GRAINE = 20260922
 
 
@@ -190,6 +191,79 @@ def intervalles(con: duckdb.DuckDBPyConnection) -> tuple[pd.DataFrame, pd.DataFr
                 "ic95_bas": float(np.percentile(rapport, 2.5)), "ic95_haut": float(np.percentile(rapport, 97.5)),
             })
     return ic, pd.DataFrame(evolutions)
+
+
+def rattrapage_split_sample(con: duckdb.DuckDBPyConnection) -> tuple[pd.DataFrame, pd.DataFrame]:
+    """Le rattrapage des communes, testé sur deux moitiés disjointes des ventes de l'année de départ.
+
+    Le test de permutation employé jusqu'ici corrélait le prix médian de l'année de départ avec
+    l'évolution `prix_fin / prix_debut - 1`. Le prix de départ est donc présent dans les deux
+    variables, au numérateur de l'une et au dénominateur de l'autre : le seul bruit d'échantillonnage
+    sur la médiane de départ suffit à produire une corrélation négative, sans aucun rattrapage réel.
+    Permuter y détruit ce couplage, donc le test ne répond pas à l'objection qu'il prétend écarter.
+
+    Le test ci-dessous sépare aléatoirement les ventes de l'année de départ de chaque commune en deux
+    moitiés : l'abscisse (prix de départ) est estimée sur la première, le dénominateur de l'évolution
+    sur la seconde. Les deux bruits deviennent indépendants et le couplage mathématique disparaît.
+    On répète N_TIRAGES fois et on publie la médiane de la corrélation de rang et son intervalle.
+    """
+    rng = np.random.default_rng(GRAINE)
+    ventes = con.execute(
+        "SELECT annee, type_bien, code_commune, prix_m2 FROM ventes_modele"
+    ).df()
+    a0, a1 = int(ventes.annee.min()), int(ventes.annee.max())
+
+    # Mêmes couples (commune, type) que le test publié : médiane publiable en a0 et en a1.
+    effectifs = ventes.groupby(["code_commune", "type_bien", "annee"]).size().unstack("annee")
+    eligibles = effectifs[(effectifs.get(a0, 0) >= SEUIL_PUBLICATION)
+                          & (effectifs.get(a1, 0) >= SEUIL_PUBLICATION)].index
+
+    debut = {cle: groupe.prix_m2.to_numpy()
+             for cle, groupe in ventes[ventes.annee == a0].groupby(["code_commune", "type_bien"])}
+    fin = {cle: float(np.median(groupe.prix_m2.to_numpy()))
+           for cle, groupe in ventes[ventes.annee == a1].groupby(["code_commune", "type_bien"])}
+
+    def rho_rang(x: np.ndarray, y: np.ndarray) -> float:
+        return float(np.corrcoef(pd.Series(x).rank(), pd.Series(y).rank())[0, 1])
+
+    tirages: dict[str, list[float]] = {}
+    for type_bien in sorted({t for _, t in eligibles}):
+        cles = [c for c in eligibles if c[1] == type_bien]
+        valeurs = []
+        for _ in range(N_TIRAGES):
+            axe, denominateur = [], []
+            for cle in cles:
+                v = debut[cle]
+                melange = rng.permutation(v)
+                moitie = len(melange) // 2
+                # Moitié A : abscisse. Moitié B : dénominateur de l'évolution. Disjointes par construction.
+                axe.append(float(np.median(melange[:moitie])))
+                denominateur.append(float(np.median(melange[moitie:])))
+            axe = np.asarray(axe)
+            evolution = np.asarray([fin[cle] for cle in cles]) / np.asarray(denominateur) - 1
+            valeurs.append(rho_rang(axe, evolution))
+        tirages[type_bien] = valeurs
+
+    lignes = []
+    for type_bien, valeurs in tirages.items():
+        cles = [c for c in eligibles if c[1] == type_bien]
+        v = np.asarray(valeurs)
+        # Corrélations de référence, sur les médianes entières, pour situer le test.
+        axe_complet = np.asarray([float(np.median(debut[c])) for c in cles])
+        fin_complet = np.asarray([fin[c] for c in cles])
+        evo_complet = fin_complet / axe_complet - 1
+        lignes.append({
+            "type_bien": type_bien, "communes": len(cles), "tirages": N_TIRAGES,
+            "annee_debut": a0, "annee_fin": a1,
+            "rho_couple_prix_debut": rho_rang(axe_complet, evo_complet),
+            "rho_prix_fin": rho_rang(fin_complet, evo_complet),
+            "rho_split_sample_median": float(np.median(v)),
+            "ic95_bas": float(np.percentile(v, 2.5)), "ic95_haut": float(np.percentile(v, 97.5)),
+            "part_tirages_negatifs": float(np.mean(v < 0)),
+        })
+    detail = pd.DataFrame([{"type_bien": t, "tirage": i, "rho": r}
+                           for t, valeurs in tirages.items() for i, r in enumerate(valeurs, 1)])
+    return pd.DataFrame(lignes), detail
 
 
 def controler_mesures(con: duckdb.DuckDBPyConnection) -> pd.DataFrame:
@@ -365,6 +439,11 @@ def main() -> None:
     ecrire_csv(ic, RESULTATS / "ic_medianes.csv")
     ecrire_csv(evolutions, RESULTATS / "ic_evolutions.csv")
     ecrire_csv(ic, APP_DATA / "ic_medianes.csv")
+
+    rattrapage, rattrapage_detail = rattrapage_split_sample(con)
+    ecrire_csv(rattrapage, RESULTATS / "rattrapage_split_sample.csv")
+    ecrire_csv(rattrapage_detail, RESULTATS / "rattrapage_split_sample_tirages.csv")
+    print(rattrapage.to_string(index=False))
 
     # Précision élargie : ce fichier sert de référence à la comparaison avec les mesures DAX
     # évaluées dans Power BI (scripts/concordance.py).

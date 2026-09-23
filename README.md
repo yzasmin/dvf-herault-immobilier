@@ -52,9 +52,14 @@ Points marquants, tous vérifiables dans `results/` :
   plus chère (5 232 €/m²) et Béziers la moins chère (1 833 €/m²), soit un rapport de 2,9. Sète (3 497 €/m²) passe
   devant Montpellier (3 425 €/m²), qui n'arrive qu'au 17e rang.
 - **Les communes les moins chères en 2021 sont celles qui ont le plus augmenté** : corrélation de rang de Spearman
-  entre prix 2021 et évolution 2021-2025 de -0,65 pour les appartements (22 communes, p = 0,0017 par test de
-  permutation) et -0,32 pour les maisons (82 communes, p = 0,0030). L'effet de régression vers la moyenne va dans
-  le même sens, donc ce résultat suggère un rattrapage sans le démontrer.
+  de **-0,61 [-0,71 ; -0,47]** pour les appartements (22 communes) et **-0,25 [-0,38 ; -0,13]** pour les maisons
+  (82 communes), prix de départ et dénominateur de l'évolution estimés sur **deux moitiés disjointes** des ventes
+  de 2021, 200 tirages (`results/rattrapage_split_sample.csv`).
+  La corrélation brute entre le prix de 2021 et l'évolution `prix_2025 / prix_2021 - 1` (-0,65 et -0,32) ne prouve
+  rien à elle seule : le prix de 2021 est au numérateur de la première variable et au dénominateur de la seconde,
+  et ce couplage mathématique produit une corrélation négative par le seul bruit d'échantillonnage. Séparer les
+  ventes de 2021 en deux moitiés rend les deux bruits indépendants et fait disparaître le couplage ; la corrélation
+  reste négative sur 200 tirages sur 200. Le rattrapage est donc établi, et non plus seulement suggéré.
 
 ### Le nettoyage, étape par étape
 
